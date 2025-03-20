@@ -1,4 +1,7 @@
-
+// 依赖库(在库管理直接搜名字安装即可):
+//   1. ESP32Servo
+//   2. ArduinoJson
+// 
 // 舵机与 esp32 引脚接线图, 数据口方向为后 (tail)
 // 
 //     前 (head)
@@ -23,8 +26,6 @@
 #include <ESP32Servo.h>
 #include <ArduinoJson.h>
 #include "minikame.h"
-
-// ESP8266WebServer esp8266_server(80);// 建立网络服务器对象，该对象用于响应HTTP请求。监听端口（80）
 
 const int led = 2;
 
@@ -145,15 +146,15 @@ bool processCommand(const char* command) {
   String cmd = String(command);
   
   if (cmd == "forward") {
-    robot.walk(2, 1000);
+    robot.forward(2, 1000);
     return true;
   } 
   else if (cmd == "backward") {
-    // robot.backward(2, 1000);
+    robot.backward(2, 1000);
     return true;
   }
   else if (cmd == "stop") {
-    // robot.stop();
+    robot.home();
     return true;
   }
   else if (cmd == "turn_L") {
@@ -162,6 +163,14 @@ bool processCommand(const char* command) {
   }
   else if (cmd == "turn_R") {
     robot.turnR(2, 1000);
+    return true;
+  }
+  else if (cmd == "hello") {
+    robot.hello();
+    return true;
+  }
+  else if (cmd == "omni_walk") {
+    robot.omniWalk();
     return true;
   }
   else {
