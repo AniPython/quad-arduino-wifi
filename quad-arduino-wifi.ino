@@ -26,17 +26,9 @@
 #include <ESP32Servo.h>
 #include <ArduinoJson.h>
 #include "minikame.h"
+#include "WiFiSetup.h"
 
-const int led = 2;
-
-// WiFi连接信息
-const char *ssid = "小亦站";
-const char *password = "88889999";
-
-// 设置静态 IP 配置
-IPAddress local_ip(192, 168, 2, 192);  // 设置固定 IP 地址
-IPAddress gateway(192, 168, 2, 1);     // 路由器网关地址
-IPAddress subnet(255, 255, 255, 0);    // 子网掩码
+const int LED = 2;
 
 WebServer server(80);
 
@@ -51,45 +43,40 @@ String indexHtml = "<!DOCTYPE html><!DOCTYPE html><html><head>    <meta charset=
 
 void setup(void) {
 
+  pinMode(LED, OUTPUT);
+  digitalWrite(LED, 0);
+
   Serial.begin(9600);  // 启动串口通讯
 
-  // WiFi.softAP(ssid,password); //建立热点
-  //
-  // Serial.print("Access Point: ");
-  // Serial.println(ssid);
-  // Serial.print("IP address: ");
-  // Serial.println(WiFi.softAPIP());
+  // 初始化WiFi
+  bool wifiConnected = initWiFi();
 
-  // 设置静态 IP 地址
-  if (!WiFi.config(local_ip, gateway, subnet)) {
-    Serial.println("配置静态 IP 失败!");
-  }
+  // 根据WiFi连接状态设置LED
+  digitalWrite(LED, wifiConnected ? 1 : 0);
 
-  // 连接到 Wi-Fi 网络
-  Serial.print("连接到 WiFi网络: ");
-  Serial.println(ssid);
-  WiFi.begin(ssid, password);
+  if (wifiConnected) {
+    // 启动Web服务器
+    server.begin();
+    server.on("/", HTTP_GET, handleRoot);
+    server.on("/control", HTTP_POST, handlePost);
+    server.onNotFound(handleNotFound);
 
-  // 等待连接
-  while (WiFi.status() != WL_CONNECTED) {
+    Serial.println("HTTP服务器已启动");
+  } else {
+    Serial.println("WiFi配置失败, 请检查设置或重启设备");
     delay(1000);
-    Serial.print(".");
+    return;
   }
-
-  // 输出连接的 IP 地址
-  Serial.println();
-  Serial.print("已连接到 WiFi, IP 地址：");
-  Serial.println(WiFi.localIP());
 
   server.begin();                        // 启动网站服务
   server.on("/", HTTP_GET, handleRoot);  // 设置服务器根目录即'/'的函数'handleRoot'
-  // server.on("/m", HTTP_GET, m);
   server.on("/control", HTTP_POST, handlePost);
   server.onNotFound(handleNotFound);  // 设置处理404情况的函数'handleNotFound'
 
   Serial.println("HTTP server started");  //  告知用户ESP32网络服务功能已经启动
   delay(10);
   robot.init();
+  
 }
 
 void loop() {
@@ -98,14 +85,10 @@ void loop() {
 
 
 void handleRoot() {
-  digitalWrite(led, 0);
-  // server.sendHeader("Access-Control-Allow-Origin", "*");
   server.send(200, "text/html", indexHtml);
-  digitalWrite(led, 1);
 }
 
 void handlePost() {
-  // server.sendHeader("Access-Control-Allow-Origin", "*");
   String postBody = server.arg("plain");
   Serial.println(postBody);
   jsonDoc.clear();
@@ -121,8 +104,6 @@ void handlePost() {
 
   // 处理命令
   if (command) {
-    Serial.print("Received command: ");
-    Serial.println(command);
 
     bool commandProcessed = processCommand(command);
 
@@ -136,7 +117,6 @@ void handlePost() {
   }
 
   server.send(200, "application/json", "{\"status\":\"success\",\"message\":\"Command received\"}");
-
 
   // server send json data
   server.send(200, "application/json", "{\"status\": \"ok\"}");
