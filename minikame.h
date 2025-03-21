@@ -31,8 +31,11 @@ public:
     void pushUp(float steps, int period);
     void frontBack(float steps, int period);
     void waveHand(float steps, int period);
-    void hide();
+    void hide(float steps, int t);
     void scared();
+
+    void run(float steps, int t);
+    void walk(float steps, int t);
 
 private:
     Oscillator oscillator[8];

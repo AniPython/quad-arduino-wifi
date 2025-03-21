@@ -149,20 +149,20 @@ bool processCommand(const char* command) {
     robot.forward(2, 1000);
     return true;
   } 
-  else if (cmd == "backward") {
-    robot.backward(2, 1000);
-    return true;
-  }
-  else if (cmd == "stop") {
-    robot.home();
-    return true;
-  }
   else if (cmd == "turn_L") {
     robot.turnL(2, 1000);
     return true;
   }
+  else if (cmd == "home") {
+    robot.home();
+    return true;
+  }
   else if (cmd == "turn_R") {
     robot.turnR(2, 1000);
+    return true;
+  }
+  else if (cmd == "backward") {
+    robot.backward(2, 1000);
     return true;
   }
   else if (cmd == "hello") {
@@ -170,7 +170,39 @@ bool processCommand(const char* command) {
     return true;
   }
   else if (cmd == "omni_walk") {
-    robot.omniWalk();
+    robot.omniWalk(2, 1000, true, 2);
+    return true;
+  }
+  else if (cmd == "moonwalk_L") {
+    robot.moonwalkL(4, 2000);
+    return true;
+  }
+  else if (cmd == "dance") {
+    robot.dance(3, 2000);
+    return true;
+  }
+  else if (cmd == "up_down") {
+    robot.upDown(2, 2000);
+    return true;
+  }
+  else if (cmd == "push_up") {
+    robot.pushUp(2, 2000);
+    return true;
+  }
+  else if (cmd == "front_back") {
+    robot.frontBack(2, 1000);
+    return true;
+  }
+  else if (cmd == "wave_hand") {
+    robot.waveHand(3, 2000);
+    return true;
+  }
+  else if (cmd == "hide") {
+    robot.hide(1, 2000);
+    return true;
+  }
+  else if (cmd == "scared") {
+    robot.scared();
     return true;
   }
   else {
