@@ -55,4 +55,5 @@ IPAddress ap_local_ip(192, 168, 20, 192);
 IPAddress ap_gateway(192, 168, 20, 1);
 IPAddress ap_subnet(255, 255, 255, 0);
 ```
-可以根据自己的需求修改 `ap_ssid` 和 `ap_password`, `ap_local_ip`, `ap_gateway`, 等信息, 不改也可以。
+可以根据自己的需求修改 `ap_ssid` 和 `ap_password`, `ap_local_ip`, `ap_gateway`, 等信息, 不改也可以。  
+然后使用手机或电脑连接这个 `Otto` 热点, 在浏览器中输入 `192.168.20.192` 就可以看到控制界面了
