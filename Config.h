@@ -4,7 +4,7 @@
 #include <WiFi.h>  // 需要包含以使用IPAddress类型
 
 // 模式选择，true 为 AP 模式，false 为 STA 模式(默认)
-const bool USE_AP_MODE = true;
+const bool USE_AP_MODE = false;
 
 // STA 模式(默认), 需要连路由器, 请使用 2.4G 频段
 const char *ssid = "小亦站";
