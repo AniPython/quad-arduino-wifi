@@ -22,7 +22,7 @@ const bool USE_AP_MODE = false;
 
 ### 2. 修改 IP 配置信息
 #### 2.1 如果是 AP 模式
-在 `Config.h` 文件中，需要根据自己的路由器修改 wifi 信息。首先修改 IP 配置信息：
+在 `Config.h` 文件中，需要根据自己的路由器修改 wifi 信息。
 ```C++
 const char *ssid = "wifi名称";
 const char *password = "wifi密码";
@@ -30,7 +30,8 @@ IPAddress local_ip(192, 168, x, 192);  // 设置固定 IP 地址
 IPAddress gateway(192, 168, x, 1);     // 路由器网关地址
 IPAddress subnet(255, 255, 255, 0);    // 子网掩码
 ```
-将 x 值修改为与路由器一致。例如，在 Windows 系统下查看 IP 信息的步骤如下：
+1) 修改 `ssid` 和 `password` 为自己的路由器信息。  
+2) 将 x 值修改为与路由器一致。例如，在 Windows 系统下查看 IP 信息的步骤如下：
 
 打开 设置 -> 网络和 Internet -> 以太网。
 查看 IPv4 地址 和 IPv4 DNS 服务器。
