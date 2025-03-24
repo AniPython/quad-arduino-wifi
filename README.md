@@ -13,15 +13,15 @@
 
 ### 1. 选择 wifi 模式
 在 `Config.h` 文件中，需要根据自己的需求选择 wifi 模式。
-默认是 `STA` 模式，即连接到路由器。
-如果没有路由器, 需要使用 esp32 创建一个热点。
+默认是 `STA` 模式，即连接到路由器。  
+如果没有路由器, 需要使用 `AP` 模式, 这时候 esp32 会创建一个热点。
 ```C++
 // 模式选择，true 为 AP 模式，false 为 STA 模式(默认)
 const bool USE_AP_MODE = false;
 ```
 
 ### 2. 修改 IP 配置信息
-#### 2.1 如果是 AP 模式
+#### 2.1 如果是 `STA` 路由模式
 在 `Config.h` 文件中，需要根据自己的路由器修改 wifi 信息。
 ```C++
 const char *ssid = "wifi名称";
@@ -47,7 +47,7 @@ IPAddress gateway(192, 168, 2, 1);     // 路由器网关地址
 ```
 然后可以以电脑或手机上打开浏览器, 输入 `192.168.2.192` 就可以看到控制界面了
 
-#### 2.2 如果是 STA 模式
+#### 2.2 如果是 `AP` 热点模式
 ```C++
 const char *ap_ssid = "Otto";
 const char *ap_password = "88889999";
