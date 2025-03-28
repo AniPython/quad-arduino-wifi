@@ -6,7 +6,8 @@
 - **B站**: [视频链接](https://www.bilibili.com/video/BV1Lzo4YnEEt/)
 
 ## 依赖的开发板
-1. esp32 (by Espressif Systems) 
+1. esp32 (by Espressif Systems)  
+   如果在线安装失败可以参考: [Arduino esp32 离线安装](https://arduino.me/a/esp32)
 
 ## 依赖的库
 1. ESP32Servo  
