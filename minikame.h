@@ -4,7 +4,7 @@
 #define MAX_PULSE_WIDTH 2400 // the longest pulse sent to a servo
 #define DEFAULT_PULSE_WIDTH 1500
 #include <ESP32Servo.h>
-#include <Octosnake.h>
+#include "Octosnake.h"
 
 class MiniKame{
 public:
