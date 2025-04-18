@@ -203,7 +203,6 @@ void MiniKame::backward(float steps = 3, int t = 800) {
   execute(steps, period, amplitude, offset, phase);
 }
 
-
 void MiniKame::turnR(float steps, int t = 600) {
   int x_amp = 15;
   int z_amp = 15;
@@ -459,4 +458,3 @@ void MiniKame::run(float steps, int t = 5000) {
 
   execute(steps, period, amplitude, offset, phase);
 }
-
