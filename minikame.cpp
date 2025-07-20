@@ -159,21 +159,20 @@ void MiniKame::walk(float steps = 3, int t = 5000) {
 void MiniKame::forward(float steps=3, int t=800) {
   int x_amp = 15;
   int z_amp = 15;
-  int ap = 10;
+  int ap = 15;
   int hi = 15;
-  int front_x = 6;
   int period[8];
   for (int i = 0; i < 8; i++) {
     period[i] = t;
   }
   int amplitude[8] = {x_amp, x_amp, z_amp, z_amp, x_amp, x_amp, z_amp, z_amp};
   int offset[8] = {
-    90 + ap - front_x,
-    90 - ap + front_x,
+    90 - ap,
+    90 + ap,
     90 - hi,
     90 + hi,
-    90 - ap - front_x,
-    90 + ap + front_x,
+    90 + ap,
+    90 - ap,
     90 + hi,
     90 - hi
   };
@@ -184,18 +183,17 @@ void MiniKame::forward(float steps=3, int t=800) {
 void MiniKame::backward(float steps = 3, int t = 800) {
   int x_amp = 15;
   int z_amp = 15;
-  int ap = 10;
+  int ap = 15;
   int hi = 15;
-  int front_x = 6;
   int period[8] = {t, t, t, t, t, t, t, t};
   int amplitude[8] = {x_amp, x_amp, z_amp, z_amp, x_amp, x_amp, z_amp, z_amp};
   int offset[8] = {
-    90 + ap - front_x,
-    90 - ap + front_x,
+    90 - ap,
+    90 + ap,
     90 - hi,
     90 + hi,
-    90 - ap - front_x,
-    90 + ap + front_x,
+    90 + ap,
+    90 - ap,
     90 + hi,
     90 - hi
   };
@@ -203,28 +201,28 @@ void MiniKame::backward(float steps = 3, int t = 800) {
   execute(steps, period, amplitude, offset, phase);
 }
 
-void MiniKame::turnR(float steps, int t = 600) {
+void MiniKame::turnL(float steps, int t = 600) {
   int x_amp = 15;
   int z_amp = 15;
-  int ap = 15;
+  int ap = 10;
   int hi = 23;
   int period[] = {t, t, t, t, t, t, t, t};
   int amplitude[] = {x_amp, x_amp, z_amp, z_amp, x_amp, x_amp, z_amp, z_amp};
-  int offset[] = {90 + ap, 90 - ap, 90 - hi, 90 + hi, 90 - ap, 90 + ap, 90 + hi, 90 - hi };
-  int phase[] = {0, 180, 90, 90, 180, 0, 90, 90};
+  int offset[] = {90 - ap, 90 + ap, 90 - hi, 90 + hi, 90 + ap, 90 - ap, 90 + hi, 90 - hi };
+  int phase[] = {180, 0, 90, 90, 0, 180, 90, 90};
 
   execute(steps, period, amplitude, offset, phase);
 }
 
-void MiniKame::turnL(float steps, int t = 600) {
+void MiniKame::turnR(float steps, int t = 600) {
   int x_amp = 15;
   int z_amp = 15;
-  int ap = 15;
+  int ap = 10;
   int hi = 23;
   int period[] = {t, t, t, t, t, t, t, t};
   int amplitude[] = {x_amp, x_amp, z_amp, z_amp, x_amp, x_amp, z_amp, z_amp};
-  int offset[] = {90 + ap, 90 - ap, 90 - hi, 90 + hi, 90 - ap, 90 + ap, 90 + hi, 90 - hi };
-  int phase[] = {180, 0, 90, 90, 0, 180, 90, 90};
+  int offset[] = {90 - ap, 90 + ap, 90 - hi, 90 + hi, 90 + ap, 90 - ap, 90 + hi, 90 - hi };
+  int phase[] = {0, 180, 90, 90, 180, 0, 90, 90};
 
   execute(steps, period, amplitude, offset, phase);
 }
@@ -297,11 +295,12 @@ void MiniKame::omniWalk(float steps=2, int t=1000, bool side=true, float turn_fa
  
 void MiniKame::moonwalkL(float steps=4, int t=2000) {
 
-  int z_amp = 25;
-  int hi = 25;
+  int z_amp = 30;
+  int hi = 15;
+  int ap = 10;
   int period[] = {t, t, t, t, t, t, t, t};
   int amplitude[] = {0, 0, z_amp, z_amp, 0, 0, z_amp, z_amp};
-  int offset[] = {90, 90, 90 - hi, 90 + hi, 90, 90, 90 + hi, 90 - hi};
+  int offset[] = {90 - ap, 90 + ap, 90 - hi, 90 + hi, 90 + ap, 90 - ap, 90 + hi, 90 - hi};
   int phase[] = {0, 0, 0, 80, 0, 0, 160, 290};
 
   execute(steps, period, amplitude, offset, phase);

@@ -76,7 +76,7 @@ void setup(void) {
   Serial.println("HTTP server started");  //  告知用户ESP32网络服务功能已经启动
   delay(10);
   robot.init();
-  
+  robot.home();
 }
 
 void loop() {
